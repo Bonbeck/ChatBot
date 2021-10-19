@@ -25,7 +25,7 @@ dicionario = {
 }
 
 with open("tecnologias.json", "w") as jsonFile:
-    json.dump(dicionario, jsonFile, ensure_ascii=False)
+    json.dump(dicionario, jsonFile, indent=4, ensure_ascii=False)
 
 with open("tecnologias.json") as jsonFile:
     json = json.load(jsonFile)
