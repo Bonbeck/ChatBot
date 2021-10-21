@@ -1,2 +1,4 @@
 token.json
 VirtualMachine/
+__pycache__/
+exemplos.py
