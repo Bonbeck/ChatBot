@@ -4,6 +4,7 @@ import os
 import subprocess as sp
 
 class R2D2():
+    #construtor da classe
     def __init__(self, name):
         try:
             memory = open(name + '.json', 'r')
@@ -12,6 +13,7 @@ class R2D2():
             memory.write('[["R2D2"], {"oi": "Olá! Qual seu nome?", "tchau": "Tchau! Tchau!"}]')
             memory.close()
             memory = open(name + '.json', 'r')
+        
         self.name = name
         self.known, self.phrases = json.load(memory)
         memory.close()
@@ -20,8 +22,8 @@ class R2D2():
     def listen(self, phrase=None):
         if phrase == None:
             phrase = input('Digite aqui: ')
-        phrase = str(phrase)
-#        phrase = str(phrase).lower()
+        #phrase = phrase
+        phrase = phrase.lower()
         return phrase
         
     def think(self, phrase):
@@ -36,24 +38,27 @@ class R2D2():
            
         # historic
         lastPhrase = self.historic[-1]
+        if lastPhrase == None:
+            lastPhrase = 'Olá! Qual seu nome?'
         if lastPhrase == 'Olá! Qual seu nome?':
             name = self.getName(phrase)
             response = self.answerName(name)
             return response
-        if lastPhrase == 'O que você quer que eu aprenda?':
+        elif lastPhrase == 'O que você quer que eu aprenda?':
             self.key = phrase
             return 'Digite o que eu devo responder:'
-        if lastPhrase == 'Digite o que eu devo responder:':
+        elif lastPhrase == 'Digite o que eu devo responder:':
             response = phrase
             self.phrases[self.key] = response
             self.saveMemory()
             return 'Aprendido!'
-        try:
-            response = str(eval(phrase))
-            return response
-        except:
-            pass
-        return 'Não entendi...'
+        else:
+            try:
+                response = str(eval(phrase))
+                return response
+            except:
+                #pass
+                return 'Não entendi...'
 
     def getName(self, name):
         if 'Meu nome é ' in name:
