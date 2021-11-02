@@ -26,14 +26,28 @@ class R2D2():
         return phrase.lower()
         
     def think(self, phrase):
+        def abreLinks(link):
+            platform = sys.platform
+            command = phrase.replace('abre link ', '')
+            if 'win' in platform:
+                os.startfile(command)
+            if 'linux' in platform:
+                try:
+                    sp.Popen(command)
+                except FileNotFoundError:
+                    sp.Popen(['xdg-open', command])
+            return "Aqui esta seu link"
+
         if phrase in self.phrases:
             return self.phrases[phrase]
-        if phrase == 'Aprende':
+        if phrase == 'aprende':
             return 'O que você quer que eu aprenda?'
-        if phrase == 'Jogar CTF':
+        if phrase == 'jogar ctf':
             return "https://tryhackme.com/"
-        if phrase == 'Jogar':
+        if phrase == 'jogar':
             return "https://brunolemos.github.io/trust/?fbclid=IwAR02exqRjzyqq3niDcqNpYKxNBj-HV6yU6VxpDdyHFN6m4GmC4WYOYpOuSw"
+        if "abre link" in phrase:
+            return abreLinks(phrase)
            
         # historic
         lastPhrase = self.historic[-1]
@@ -83,16 +97,5 @@ class R2D2():
         memory.close()
 
     def speak(self, phrase):
-        if 'Abre link ' in phrase:
-            platform = sys.platform
-            command = phrase.replace('Abre link ', '')
-            if 'win' in platform:
-                os.startfile(command)
-            if 'linux' in platform:
-                try:
-                    sp.Popen(command)
-                except FileNotFoundError:
-                    sp.Popen(['xdg-open', command])
-        else:
-            print(phrase)
+        print(phrase)
         self.historic.append(phrase)
