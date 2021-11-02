@@ -23,6 +23,8 @@ class R2D2():
         if phrase == None:
             phrase = input('Digite aqui: ')
         phrase = phrase
+        if "abre link" in phrase:
+            return phrase
         return phrase.lower()
         
     def think(self, phrase):
