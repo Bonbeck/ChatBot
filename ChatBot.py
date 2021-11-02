@@ -22,9 +22,8 @@ class R2D2():
     def listen(self, phrase=None):
         if phrase == None:
             phrase = input('Digite aqui: ')
-        #phrase = phrase
-        phrase = phrase.lower()
-        return phrase
+        phrase = phrase
+        return phrase.lower()
         
     def think(self, phrase):
         if phrase in self.phrases:

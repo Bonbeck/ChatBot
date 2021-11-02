@@ -2,3 +2,6 @@ token.json
 VirtualMachine/
 __pycache__/
 exemplos.py
+.vscode
+teste.py
+R2D2.json
