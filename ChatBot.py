@@ -10,7 +10,19 @@ class R2D2():
             memory = open(name + '.json', 'r')
         except FileNotFoundError:
             memory = open(name + '.json', 'w')
-            memory.write('[["R2D2"], {"oi": "Olá! Qual seu nome?", "tchau": "Tchau! Tchau!"}]')
+            memory.write('''
+                            [
+                                ["R2D2"],
+                                {
+                                    "oi": "Olá! Qual seu nome?",
+                                    "tchau": "Tchau! Tchau!",
+                                    "aprende": "O que você quer que eu aprenda?",
+                                    "jogar ctf": "https://tryhackme.com/",
+                                    "jogar": "https://brunolemos.github.io/trust/?fbclid=IwAR02exqRjzyqq3niDcqNpYKxNBj-HV6yU6VxpDdyHFN6m4GmC4WYOYpOuSw"
+                                }
+                            ]
+                        ''')
+                        
             memory.close()
             memory = open(name + '.json', 'r')
         
@@ -42,12 +54,6 @@ class R2D2():
 
         if phrase in self.phrases:
             return self.phrases[phrase]
-        if phrase == 'aprende':
-            return 'O que você quer que eu aprenda?'
-        if phrase == 'jogar ctf':
-            return "https://tryhackme.com/"
-        if phrase == 'jogar':
-            return "https://brunolemos.github.io/trust/?fbclid=IwAR02exqRjzyqq3niDcqNpYKxNBj-HV6yU6VxpDdyHFN6m4GmC4WYOYpOuSw"
         if "abre link" in phrase:
             return abreLinks(phrase)
            
